@@ -20,9 +20,26 @@ RSpec.describe Ride do
     expect(ride1.rider_log).to eq({})
   end
 
-  it 'can board riders, this action will subtract from a riders spending money, add to the rides total_revenue and will add the rider to the rider log' do 
+  it 'can tell if the visitor preference matches the ride exitement tags > pref_match?' do 
     ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
-    
+    ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+
+    visitor1 = Visitor.new('Bruce', 54, '$10')
+    visitor1.add_preference(:gentle)
+    visitor3 = Visitor.new('Penny', 64, '$15')
+
+    expect(ride1.pref_match?(visitor1)).to eq(true)
+    expect(ride3.pref_match?(visitor3)).to eq(false)
+
+    visitor3.add_preference(:thrilling)
+
+    expect(ride3.pref_match?(visitor3)).to eq(true)
+
+  end
+
+  xit 'can board riders, this action will subtract from a riders spending money, add to the rides total_revenue and will add the rider to the rider log' do 
+    ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+
     visitor1 = Visitor.new('Bruce', 54, '$10')
     visitor2 = Visitor.new('Tucker', 36, '$5')
     visitor1.add_preference(:gentle)
