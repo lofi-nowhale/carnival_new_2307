@@ -21,6 +21,6 @@ class Ride
   end
 
   def afford?(visitor)
-  
+  visitor.spending_money >= @admission_fee
   end
 end
