@@ -8,4 +8,19 @@ class Ride
     @rider_log = {}
     @total_revenue = 0
   end
+
+  # def board_rider(visitor)
+  #   if pref_match? && tall_enough?
+      
+  #   end
+
+  # end
+
+  def pref_match?(visitor)
+    visitor.preferences.include?(@excitement)
+  end
+
+  def afford?(visitor)
+  
+  end
 end
