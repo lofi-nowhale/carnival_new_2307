@@ -9,18 +9,23 @@ class Ride
     @total_revenue = 0
   end
 
-  # def board_rider(visitor)
-  #   if pref_match? && tall_enough?
+  def board_rider(visitor)
+    if pref_match?(visitor) && afford?(visitor) && visitor.tall_enough?(min_height)
+      charge(visitor)
       
-  #   end
-
-  # end
+      rider_log[visitor] = visitor
+    end
+  end
 
   def pref_match?(visitor)
     visitor.preferences.include?(@excitement)
   end
 
   def afford?(visitor)
-  visitor.spending_money >= @admission_fee
+    visitor.spending_money >= @admission_fee
+  end
+
+  def charge(visitor)
+    @spending_money = visitor.spending_money - admission_fee
   end
 end

@@ -55,11 +55,15 @@ RSpec.describe Ride do
 
     visitor1 = Visitor.new('Bruce', 54, '$10')
     visitor2 = Visitor.new('Tucker', 36, '$5')
+
     visitor1.add_preference(:gentle)
     visitor2.add_preference(:gentle)
 
     ride1.board_rider(visitor1)
     ride1.board_rider(visitor2)
     ride1.board_rider(visitor1)
+    
+    expect(visitor1.spending_money).to eq(9)
+    expect(visitor2.spending_money).to eq(4)
   end
 end
