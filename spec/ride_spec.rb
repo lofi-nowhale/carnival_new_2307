@@ -34,10 +34,23 @@ RSpec.describe Ride do
     visitor3.add_preference(:thrilling)
 
     expect(ride3.pref_match?(visitor3)).to eq(true)
+  end
+
+  it 'can tell if a visitor has enough money to pay the rides admission fee' do 
+    ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+    ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+
+    visitor1 = Visitor.new('Bruce', 54, '$10')
+    visitor2 = Visitor.new('Sam', 36, '$1')
+
+    expect(ride1.afford?(visitor1)).to eq(true)
+    expect(ride1.afford?(visitor2)).to eq(true)
+    expect(ride3.afford?(visitor1)).to eq(true)
+    expect(ride3.afford?(visitor2)).to eq(false)
 
   end
 
-  xit 'can board riders, this action will subtract from a riders spending money, add to the rides total_revenue and will add the rider to the rider log' do 
+  it 'can board riders, this action will subtract from a riders spending money, add to the rides total_revenue and will add the rider to the rider log' do 
     ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
 
     visitor1 = Visitor.new('Bruce', 54, '$10')
